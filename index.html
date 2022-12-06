@@ -21,7 +21,6 @@
             <ul>
                 <li v-for="name in genre">
                     <span class="name">{{ name }}</span>
-
                 </li>
             </ul>
         </div>
@@ -44,7 +43,7 @@
 				},
 
                 watch: {
-					currentGenre: "fetchData", //fetchDataAsync
+					currentGenre: "fetchData",
 				},
 
                 methods: {

@@ -7,20 +7,37 @@
     </head>
     <body>
         <div id="test">
-        <h1>Choisis ton style</h1>
-            <p v-bind:class="">{{ genre }}</p>
+            <pre>{{genre}}</pre>
+            <h1>Les styles sur deezer</h1>
+            <template v-for="genre in genres" >
+                    <input
+					type="radio"
+					:id="genre"
+					:value="genre"
+					name="genre"
+					v-model="currentGenre"
+				/>
+                <label :for="genre">{{ genre }}</label>
+            </template>
+            <p>vuejs/vue@{{ currentGenre }}</p>
+            <ul>
+                <li v-for="data in genre">
+                    <span class="name">{{ data.name }}</span>
+
+                </li>
+            </ul>
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script src="https://unpkg.com/vue@3"></script>
         <script>
-            const apiURL = "https://api.deezer.com/genre/132"
+            const apiURL = "https://api.deezer.com/genre/"
 
             Vue.createApp({
                 data() {
                     return{
-                        genres : ["132", "116"],
-                        currentGenre: "132",
-                        genre: [],
+                        genres: ["0", "132", "116"],
+                        currentGenre: "0",
+                        genre: null,
                     }
                 },
 
@@ -36,15 +53,18 @@
                     fetchData: function () {
                         const self = this;
                         axios
-                            .get(apiURL)
+                            .get(apiURL + self.currentGenre)
                             .then(function (response) {
-                                console.log(response.data, "data")
-                                self.genre = response.data;   
+                                console.log(response.data, "dataAsked")
+                                self.genre = response.data;
+                                  
                             })
                             .catch(function(error) {
                                 console.log(error)
                             })
+                            
                     },
+                    
                 }
             }).mount("#test")
         </script>

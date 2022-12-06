@@ -7,8 +7,7 @@
     </head>
     <body>
         <div id="test">
-            <pre>{{genre}}</pre>
-            <h1>Les styles sur deezer</h1>
+            <h1>Les styles musicaux en fonction de leur ID deezer</h1>
             <template v-for="genre in genres" >
                     <input
 					type="radio"
@@ -19,10 +18,9 @@
 				/>
                 <label :for="genre">{{ genre }}</label>
             </template>
-            <p>vuejs/vue@{{ currentGenre }}</p>
             <ul>
-                <li v-for="data in genre">
-                    <span class="name">{{ data.name }}</span>
+                <li v-for="name in genre">
+                    <span class="name">{{ name }}</span>
 
                 </li>
             </ul>
@@ -35,7 +33,7 @@
             Vue.createApp({
                 data() {
                     return{
-                        genres: ["0", "132", "116"],
+                        genres: ["0", "132", "457","116", "152", "113", "165", "85", "106", "466", "144", "129","52","84", "98","173", "463", "169", "153", "197", "2", "12", "16", "75", "81"],
                         currentGenre: "0",
                         genre: null,
                     }

@@ -1,69 +1,107 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>APP Vue Deezer</title>
-    </head>
-    <body>
-        <div id="test">
-            <h1>Les styles musicaux en fonction de leur ID deezer</h1>
-            <template v-for="genre in genres" >
-                    <input
-					type="radio"
-					:id="genre"
-					:value="genre"
-					name="genre"
-					v-model="currentGenre"
-				/>
-                <label :for="genre">{{ genre }}</label>
-            </template>
-            <ul>
-                <li v-for="name in genre">
-                    <span class="name">{{ name }}</span>
-                </li>
-            </ul>
-        </div>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<script src="https://unpkg.com/vue@3"></script>
-        <script>
-            const apiURL = "https://api.deezer.com/genre/"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>APP Vue Deezer</title>
+  </head>
+  <style>
+    /* [v-cloak] {
+            display: none;
+        } */
+    li {
+      list-style-type: none;
+    }
+  </style>
+  <body>
+    <div id="test">
+      <h1>Les styles musicaux en fonction de leur ID deezer</h1>
+      <template v-for="genre in genres">
+        <input
+          type="radio"
+          :id="genre"
+          :value="genre"
+          name="genre"
+          v-model="currentGenre"
+        />
+        <label :for="genre">{{ genre }}</label>
+      </template>
+      <!-- <label for="pet-select">Choose a genre:</label>
 
-            Vue.createApp({
-                data() {
-                    return{
-                        genres: ["0", "132", "457","116", "152", "113", "165", "85", "106", "466", "144", "129","52","84", "98","173", "463", "169", "153", "197", "2", "12", "16", "75", "81"],
-                        currentGenre: "0",
-                        genre: null,
-                    }
-                },
+      <select name="genre" id="pet-select">
+        <option value="">--Please choose an option--</option>
+        <option v-for="genre in genres" @click="fetchData">{{ genre }}</option>
+      </select> -->
+      <ul>
+        <li>{{genre.name}}</li>
+        <li>
+          <img :src="genre.picture" alt="img" />
+        </li>
+      </ul>
+    </div>
 
-                created: function () {
-					this.fetchData();
-				},
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const apiURL = "https://api.deezer.com/genre/";
 
-                watch: {
-					currentGenre: "fetchData",
-				},
+      Vue.createApp({
+        data() {
+          return {
+            genres: [
+              "132",
+              "457",
+              "116",
+              "152",
+              "113",
+              "165",
+              "85",
+              "106",
+              "466",
+              "144",
+              "129",
+              "52",
+              "84",
+              "98",
+              "173",
+              "463",
+              "169",
+              "153",
+              "197",
+              "2",
+              "12",
+              "16",
+              "75",
+              "81",
+            ],
+            currentGenre: "132",
+            genre: null,
+          };
+        },
 
-                methods: {
-                    fetchData: function () {
-                        const self = this;
-                        axios
-                            .get(apiURL + self.currentGenre)
-                            .then(function (response) {
-                                console.log(response.data, "dataAsked")
-                                self.genre = response.data;
-                                  
-                            })
-                            .catch(function(error) {
-                                console.log(error)
-                            })
-                            
-                    },
-                    
-                }
-            }).mount("#test")
-        </script>
-    </body>
+        created: function () {
+          this.fetchData();
+        },
+
+        watch: {
+          currentGenre: "fetchData",
+        },
+
+        methods: {
+          fetchData: function () {
+            const self = this;
+            axios
+              .get(apiURL + self.currentGenre)
+              .then(function (response) {
+                console.log(response.data, "dataAsked");
+                self.genre = response.data;
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          },
+        },
+      }).mount("#test");
+    </script>
+  </body>
 </html>

@@ -1,0 +1,30 @@
+li {
+    list-style-type: none;
+}
+[v-cloak] {
+    display: none;
+}
+body{
+    font-family: 'Red Hat Display', sans-serif;
+}
+h1{
+    display: flex;
+    border-bottom: 5px solid;
+    margin-left: -8px;
+    margin-right: -8px;
+    justify-content: center;
+    margin-top: 10px; 
+    padding-bottom: 8px;
+}
+h2{
+    display: flex;
+    justify-content: center;
+}
+#inputStyle{
+    display: flex;
+    justify-content: space-around;
+}
+ul{
+    display: flex;
+    justify-content: center;
+}

@@ -6,15 +6,15 @@
     <title>APP Vue Deezer</title>
   </head>
   <style>
-    /* [v-cloak] {
-            display: none;
-        } */
     li {
       list-style-type: none;
     }
+    [v-cloak] {
+      display: none;
+    }
   </style>
   <body>
-    <div id="test">
+    <div v-cloak id="test">
       <h1>Les styles musicaux en fonction de leur ID deezer</h1>
       <template v-for="genre in genres">
         <input
@@ -26,13 +26,7 @@
         />
         <label :for="genre">{{ genre }}</label>
       </template>
-      <!-- <label for="pet-select">Choose a genre:</label>
-
-      <select name="genre" id="pet-select">
-        <option value="">--Please choose an option--</option>
-        <option v-for="genre in genres" @click="fetchData">{{ genre }}</option>
-      </select> -->
-      <ul>
+      <ul v-if="genre?.name">
         <li>{{genre.name}}</li>
         <li>
           <img :src="genre.picture" alt="img" />
@@ -74,13 +68,9 @@
               "75",
               "81",
             ],
-            currentGenre: "132",
+            currentGenre: "",
             genre: null,
           };
-        },
-
-        created: function () {
-          this.fetchData();
         },
 
         watch: {
